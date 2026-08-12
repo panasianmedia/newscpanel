@@ -1,0 +1,72 @@
+{
+  "kind": "collectionType",
+  "collectionName": "articles",
+  "info": {
+    "singularName": "article",
+    "pluralName": "articles",
+    "displayName": "Article"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string",
+      "required": true
+    },
+    "Author": {
+      "type": "string",
+      "required": true
+    },
+    "Date": {
+      "type": "date",
+      "required": true
+    },
+    "Image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "Caption": {
+      "type": "string"
+    },
+    "Content": {
+      "type": "blocks",
+      "required": true
+    },
+    "HomeSub": {
+      "type": "enumeration",
+      "required": false,
+      "enum": [
+        "breaking",
+        "exclusive",
+        "latest",
+        "realtybytes",
+        "trending",
+        "highlights",
+        "megaprojects"
+      ]
+    },
+    "CategorySub": {
+      "type": "json",
+      "required": true
+    },
+    "SubCategorySub": {
+      "type": "enumeration",
+      "required": false,
+      "enum": [
+        "lead",
+        "topstories",
+        "latest",
+        "marketinsights",
+        "sectorspotlight"
+      ]
+    }
+  }
+}
