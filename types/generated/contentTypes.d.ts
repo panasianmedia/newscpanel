@@ -481,6 +481,7 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    Slug: Schema.Attribute.UID<'Title'>;
     SubCategorySub: Schema.Attribute.Enumeration<
       ['lead', 'topstories', 'latest', 'marketinsights', 'sectorspotlight']
     >;

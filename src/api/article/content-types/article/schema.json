@@ -67,6 +67,10 @@
         "marketinsights",
         "sectorspotlight"
       ]
+    },
+    "Slug": {
+      "type": "uid",
+      "targetField": "Title"
     }
   }
 }
