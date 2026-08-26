@@ -464,13 +464,14 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
     Date: Schema.Attribute.Date & Schema.Attribute.Required;
     HomeSub: Schema.Attribute.Enumeration<
       [
-        'breaking',
-        'exclusive',
-        'latest',
-        'realtybytes',
-        'trending',
-        'highlights',
-        'megaprojects',
+        'Breaking',
+        'Lead',
+        'Exclusive',
+        'Latest',
+        'Realty Bytes',
+        'Trending',
+        'Highlights',
+        'Megaprojects',
       ]
     >;
     Image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
@@ -483,7 +484,7 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     Slug: Schema.Attribute.UID<'Title'>;
     SubCategorySub: Schema.Attribute.Enumeration<
-      ['lead', 'topstories', 'latest', 'marketinsights', 'sectorspotlight']
+      ['Lead Story', 'Top Story', 'Latest', 'Market Insights', 'Spotlight']
     >;
     Title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;

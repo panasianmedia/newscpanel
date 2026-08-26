@@ -44,13 +44,14 @@
       "type": "enumeration",
       "required": false,
       "enum": [
-        "breaking",
-        "exclusive",
-        "latest",
-        "realtybytes",
-        "trending",
-        "highlights",
-        "megaprojects"
+        "Breaking",
+        "Lead",
+        "Exclusive",
+        "Latest",
+        "Realty Bytes",
+        "Trending",
+        "Highlights",
+        "Megaprojects"
       ]
     },
     "CategorySub": {
@@ -61,11 +62,11 @@
       "type": "enumeration",
       "required": false,
       "enum": [
-        "lead",
-        "topstories",
-        "latest",
-        "marketinsights",
-        "sectorspotlight"
+        "Lead Story",
+        "Top Story",
+        "Latest",
+        "Market Insights",
+        "Spotlight"
       ]
     },
     "Slug": {
