@@ -532,6 +532,40 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiMagazineIssueMagazineIssue
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'magazine_issues';
+  info: {
+    displayName: 'Magazine Issue';
+    pluralName: 'magazine-issues';
+    singularName: 'magazine-issue';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Cover: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    Description: Schema.Attribute.Text;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::magazine-issue.magazine-issue'
+    > &
+      Schema.Attribute.Private;
+    MonthandYear: Schema.Attribute.String;
+    PDF: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
+    publishedAt: Schema.Attribute.DateTime;
+    Slug: Schema.Attribute.String;
+    Title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
@@ -1045,6 +1079,7 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::advertisement.advertisement': ApiAdvertisementAdvertisement;
       'api::article.article': ApiArticleArticle;
+      'api::magazine-issue.magazine-issue': ApiMagazineIssueMagazineIssue;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

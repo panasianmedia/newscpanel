@@ -1,0 +1,47 @@
+{
+  "kind": "collectionType",
+  "collectionName": "magazine_issues",
+  "info": {
+    "singularName": "magazine-issue",
+    "pluralName": "magazine-issues",
+    "displayName": "Magazine Issue"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Slug": {
+      "type": "string"
+    },
+    "MonthandYear": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "text"
+    },
+    "PDF": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "Cover": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}
