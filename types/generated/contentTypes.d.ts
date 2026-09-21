@@ -566,6 +566,85 @@ export interface ApiMagazineIssueMagazineIssue
   };
 }
 
+export interface ApiOwnYourStoryOwnYourStory
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'own_your_stories';
+  info: {
+    displayName: 'Own Your Story';
+    pluralName: 'own-your-stories';
+    singularName: 'own-your-story';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Author: Schema.Attribute.String;
+    Content: Schema.Attribute.Blocks;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    Date: Schema.Attribute.Date;
+    Image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::own-your-story.own-your-story'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    Slug: Schema.Attribute.UID<'Title'>;
+    Summary: Schema.Attribute.Text;
+    Title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiSocialPostSocialPost extends Struct.CollectionTypeSchema {
+  collectionName: 'social_posts';
+  info: {
+    description: 'Cross-platform social media distribution for news articles';
+    displayName: 'Social Post';
+    pluralName: 'social-posts';
+    singularName: 'social-post';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    article: Schema.Attribute.Relation<'manyToOne', 'api::article.article'>;
+    caption_facebook: Schema.Attribute.Text;
+    caption_instagram: Schema.Attribute.Text;
+    caption_linkedin: Schema.Attribute.Text;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    custom_media: Schema.Attribute.Media<'images'>;
+    error_log: Schema.Attribute.JSON;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::social-post.social-post'
+    > &
+      Schema.Attribute.Private;
+    platforms: Schema.Attribute.Enumeration<
+      ['instagram', 'facebook', 'linkedin']
+    > &
+      Schema.Attribute.Required;
+    posted_at: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    status: Schema.Attribute.Enumeration<
+      ['draft', 'ready_to_post', 'posted', 'failed']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'draft'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
@@ -1080,6 +1159,8 @@ declare module '@strapi/strapi' {
       'api::advertisement.advertisement': ApiAdvertisementAdvertisement;
       'api::article.article': ApiArticleArticle;
       'api::magazine-issue.magazine-issue': ApiMagazineIssueMagazineIssue;
+      'api::own-your-story.own-your-story': ApiOwnYourStoryOwnYourStory;
+      'api::social-post.social-post': ApiSocialPostSocialPost;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

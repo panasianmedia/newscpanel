@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "own_your_stories",
+  "info": {
+    "singularName": "own-your-story",
+    "pluralName": "own-your-stories",
+    "displayName": "Own Your Story"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Slug": {
+      "type": "uid",
+      "targetField": "Title"
+    },
+    "Summary": {
+      "type": "text"
+    },
+    "Content": {
+      "type": "blocks"
+    },
+    "Image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "Author": {
+      "type": "string"
+    },
+    "Date": {
+      "type": "date"
+    }
+  }
+}

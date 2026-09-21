@@ -1,0 +1,63 @@
+{
+  "kind": "collectionType",
+  "collectionName": "social_posts",
+  "info": {
+    "singularName": "social-post",
+    "pluralName": "social-posts",
+    "displayName": "Social Post",
+    "description": "Cross-platform social media distribution for news articles"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "article": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::article.article"
+    },
+    "platforms": {
+      "type": "enumeration",
+      "enum": [
+        "instagram",
+        "facebook",
+        "linkedin"
+      ],
+      "multiple": true,
+      "required": true
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "draft",
+        "ready_to_post",
+        "posted",
+        "failed"
+      ],
+      "default": "draft",
+      "required": true
+    },
+    "caption_facebook": {
+      "type": "text"
+    },
+    "caption_instagram": {
+      "type": "text"
+    },
+    "caption_linkedin": {
+      "type": "text"
+    },
+    "custom_media": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "error_log": {
+      "type": "json"
+    },
+    "posted_at": {
+      "type": "datetime"
+    }
+  }
+}
