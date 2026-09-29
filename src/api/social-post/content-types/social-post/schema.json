@@ -24,7 +24,6 @@
         "facebook",
         "linkedin"
       ],
-      "multiple": true,
       "required": true
     },
     "status": {

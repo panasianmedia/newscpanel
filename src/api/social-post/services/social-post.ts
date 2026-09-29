@@ -26,6 +26,11 @@ export default ({ strapi }: { strapi: any }) => ({
     if (post.status === 'posted') {
       return post;
     }
+    const selectedPlatforms: string[] = Array.isArray(post.platforms)
+      ? post.platforms
+      : post.platforms
+        ? [post.platforms]
+        : [];
 
     let article = post.article;
     if (!article) {
@@ -84,7 +89,7 @@ export default ({ strapi }: { strapi: any }) => ({
     }
 
     const payload = {
-      platforms: post.platforms || [],
+      platforms: selectedPlatforms,
       articleUrl,
       imageUrl: uploadedMediaUrl,
       article: {
@@ -100,7 +105,6 @@ export default ({ strapi }: { strapi: any }) => ({
 
     const results = await publisher().dispatch(payload);
 
-    const selectedPlatforms: string[] = post.platforms || [];
     const isSuccess =
       selectedPlatforms.length > 0 &&
       selectedPlatforms.every((platform) => results.successes.includes(platform));

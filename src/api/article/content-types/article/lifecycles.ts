@@ -11,27 +11,49 @@ function queueSocialPost(article: any) {
     .transaction(({ onCommit, onRollback }: any) => {
       onCommit(() => {
         setImmediate(async () => {
+          let operation = 'checking for an existing Social Post';
           try {
-            const [existingPost] = await strapi.entityService.findMany(
+            const existingPosts = await strapi.entityService.findMany(
               'api::social-post.social-post',
               {
                 filters: { article: { id: { $eq: article.id } } },
-                fields: ['id'],
-                limit: 1,
+                fields: ['id', 'platforms'],
               },
             );
 
-            if (existingPost) return;
+            for (const platform of ['instagram', 'facebook'] as const) {
+              if (existingPosts.some((existingPost: any) => existingPost.platforms === platform)) {
+                continue;
+              }
 
-            await strapi.entityService.create('api::social-post.social-post', {
-              data: {
-                article: article.id,
-                platforms: ['instagram', 'facebook'] as any,
-                status: 'ready_to_post',
-              },
+              operation = `creating the ${platform} Social Post`;
+              await strapi.entityService.create('api::social-post.social-post', {
+                data: {
+                  article: article.id,
+                  platforms: platform,
+                  status: 'ready_to_post',
+                },
+              });
+            }
+          } catch (error: any) {
+            const nestedErrors = Array.isArray(error?.errors)
+              ? error.errors.map((nested: any) => ({
+                  name: nested?.name,
+                  message: nested?.message || String(nested),
+                  details: nested?.details,
+                  stack: nested?.stack,
+                }))
+              : error?.errors;
+            const errorDetails = JSON.stringify({
+              name: error?.name,
+              message: error?.message || String(error),
+              details: error?.details,
+              errors: nestedErrors,
+              stack: error?.stack,
             });
-          } catch (error) {
-            strapi.log.error(`[Article Social Publisher] Error for article ${articleId}:`, error);
+            strapi.log.error(
+              `[Article Social Publisher] Failed while ${operation} for article ${articleId}: ${errorDetails}`,
+            );
           } finally {
             pendingArticleIds.delete(articleId);
           }
